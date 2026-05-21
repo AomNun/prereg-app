@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Pre-Registration — ลงทะเบียนก่อนมา รพ.</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --blue:#1557b0;--blue2:#1a6ed8;--blue-light:#e8f0fe;--blue-pale:#f0f4ff;
+  --green:#0f9d58;--green-light:#e6f4ea;
+  --orange:#f57c00;--red:#d32f2f;--red-light:#fdecea;
+  --gray1:#f8f9fa;--gray2:#f1f3f4;--gray3:#e8eaed;--gray4:#dadce0;
+  --text:#202124;--text2:#5f6368;--text3:#9aa0a6;
+  --white:#ffffff;--radius:14px;--radius-sm:10px;
+  --shadow:0 2px 8px rgba(0,0,0,.1);--shadow-lg:0 8px 32px rgba(0,0,0,.15);
+}
+html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif}
+
+/* ── PHONE FRAME ── */
+.phone-outer{
+  display:flex;align-items:center;justify-content:center;
+  min-height:100vh;padding:20px;
+}
+.phone-frame{
+  width:390px;
+  background:#111;
+  border-radius:52px;
+  padding:14px;
+  box-shadow:0 40px 80px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.08);
+  position:relative;
+}
+/* Notch */
+.phone-frame::before{
+  content:'';position:absolute;top:14px;left:50%;transform:translateX(-50%);
+  width:120px;height:34px;background:#111;border-radius:0 0 20px 20px;z-index:10;
+}
+.phone-screen{
+  background:var(--gray1);
+  border-radius:42px;
+  overflow:hidden;
+  height:820px;
+  display:flex;flex-direction:column;
+  position:relative;
+}
+
+/* ── STATUS BAR ── */
+.status-bar{
+  height:44px;background:var(--blue);
+  display:flex;align-items:flex-end;justify-content:space-between;
+  padding:0 24px 8px;color:#fff;font-size:13px;font-weight:600;
+  flex-shrink:0;
+}
+.sb-icons{display:flex;gap:5px;align-items:center;font-size:12px}
+
+/* ── APP HEADER ── */
+.app-header{
+  background:linear-gradient(175deg,var(--blue) 0%,#0d47a1 100%);
+  padding:16px 20px 24px;color:#fff;flex-shrink:0;
+  position:relative;overflow:hidden;
+}
+.app-header::after{
+  content:'';position:absolute;
+  width:220px;height:220px;border-radius:50%;
+  background:rgba(255,255,255,.05);
+  top:-80px;right:-60px;
+}
+.hosp-row{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.hosp-icon{
+  width:42px;height:42px;background:rgba(255,255,255,.18);
+  border-radius:12px;display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
+}
+.hosp-name{font-size:14px;font-weight:700;line-height:1.2}
+.hosp-sub{font-size:11px;opacity:.7;margin-top:2px}
+.header-greeting{font-size:22px;font-weight:700;line-height:1.3;position:relative;z-index:1}
+.header-sub{font-size:13px;opacity:.75;margin-top:4px;position:relative;z-index:1}
+
+/* ── PROGRESS ── */
+.progress-bar{
+  background:#fff;padding:14px 20px 10px;
+  border-bottom:1px solid var(--gray3);flex-shrink:0;
+}
+.prog-track{display:flex;align-items:center;margin-bottom:6px}
+.prog-dot{
+  width:30px;height:30px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;flex-shrink:0;
+  transition:all .35s;
+}
+.prog-dot.idle{background:var(--gray3);color:var(--text3)}
+.prog-dot.active{background:var(--blue);color:#fff;box-shadow:0 0 0 4px var(--blue-light)}
+.prog-dot.done{background:var(--green);color:#fff}
+.prog-dot.done::after{content:'✓';font-size:14px}
+.prog-dot.done .pn{display:none}
+.prog-line{flex:1;height:3px;background:var(--gray3);margin:0 6px;border-radius:2px;transition:background .35s}
+.prog-line.done{background:var(--green)}
+.prog-labels{display:flex;justify-content:space-between}
+.prog-label{font-size:10px;color:var(--text3);font-weight:500;transition:color .3s;text-align:center;flex:1}
+.prog-label.active{color:var(--blue);font-weight:700}
+.prog-label.done{color:var(--green)}
+
+/* ── SCROLL CONTENT ── */
+.scroll-area{flex:1;overflow-y:auto;padding:18px 16px 24px;background:var(--gray1)}
+.scroll-area::-webkit-scrollbar{width:3px}
+.scroll-area::-webkit-scrollbar-thumb{background:var(--gray4);border-radius:2px}
+
+/* ── PANELS ── */
+.panel{display:none;animation:fadeSlide .3s ease}
+.panel.active{display:block}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SECTION CARD ── */
+.sec-title{
+  display:flex;align-items:center;gap:10px;
+  font-size:16px;font-weight:700;color:var(--text);
+  margin-bottom:16px;
+}
+.sec-icon{
+  width:38px;height:38px;border-radius:11px;
+  background:var(--blue-light);color:var(--blue);
+  display:flex;align-items:center;justify-content:center;
+  font-size:19px;flex-shrink:0;
+}
+
+/* ── FIELDS ── */
+.field{margin-bottom:15px}
+.field-label{
+  font-size:13px;font-weight:600;color:var(--text2);
+  margin-bottom:6px;display:block;
+}
+.req{color:var(--red)}
+.field input,.field select,.field textarea{
+  width:100%;padding:13px 14px;
+  border:1.5px solid var(--gray4);border-radius:var(--radius-sm);
+  font-size:15px;color:var(--text);background:#fff;
+  font-family:'Noto Sans Thai',sans-serif;
+  outline:none;transition:border .2s,box-shadow .2s;
+  appearance:none;-webkit-appearance:none;
+}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:var(--blue2);box-shadow:0 0 0 3px rgba(21,87,176,.12)
+}
+.field input.has-error{border-color:var(--red);background:var(--red-light)}
+.err-txt{font-size:11.5px;color:var(--red);margin-top:5px;display:flex;align-items:center;gap:4px}
+.field textarea{resize:none;height:85px;line-height:1.6}
+.field select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239aa0a6' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;background-size:18px;
+  padding-right:38px;
+}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* ── CARD OPTION ── */
+.card-opts{display:flex;gap:10px;flex-wrap:wrap}
+.card-opt{
+  flex:1;min-width:120px;
+  border:1.5px solid var(--gray4);border-radius:var(--radius-sm);
+  padding:12px 10px;background:#fff;cursor:pointer;
+  display:flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:500;color:var(--text2);
+  transition:all .2s;
+}
+.card-opt input{display:none}
+.card-opt.selected{border-color:var(--blue);background:var(--blue-light);color:var(--blue)}
+.card-opt-radio{
+  width:20px;height:20px;border-radius:50%;
+  border:2px solid var(--gray4);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.card-opt.selected .card-opt-radio{border-color:var(--blue);background:var(--blue)}
+.card-opt.selected .card-opt-radio::after{content:'';width:6px;height:6px;background:#fff;border-radius:50%}
+
+/* ── SUMMARY ── */
+.summary-box{
+  background:#fff;border:1px solid var(--gray4);
+  border-radius:var(--radius);overflow:hidden;margin-bottom:16px;
+}
+.summary-head{
+  background:var(--blue);color:#fff;
+  padding:12px 16px;font-size:13px;font-weight:600;
+  display:flex;align-items:center;gap:8px;
+}
+.summary-row{
+  display:flex;padding:11px 16px;
+  border-bottom:1px solid var(--gray1);font-size:13px;
+}
+.summary-row:last-child{border-bottom:none}
+.sr-label{color:var(--text3);width:110px;flex-shrink:0;font-weight:500}
+.sr-val{color:var(--text);font-weight:600;flex:1}
+
+/* ── CONSENT ── */
+.consent-wrap{
+  background:#fff;border:1.5px solid var(--gray4);
+  border-radius:var(--radius-sm);padding:14px;
+  display:flex;gap:12px;align-items:flex-start;
+  cursor:pointer;margin-bottom:8px;transition:border .2s;
+}
+.consent-wrap.on{border-color:var(--blue);background:var(--blue-pale)}
+.cb-box{
+  width:24px;height:24px;border:2px solid var(--gray4);
+  border-radius:6px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;transition:all .2s;background:#fff;
+}
+.consent-wrap.on .cb-box{background:var(--blue);border-color:var(--blue);color:#fff}
+.consent-text{font-size:12px;color:var(--text2);line-height:1.65}
+.consent-text b{color:var(--blue)}
+
+/* ── BUTTONS ── */
+.btn-row{display:flex;gap:10px;margin-top:18px}
+.btn{
+  padding:14px 18px;border-radius:var(--radius-sm);
+  font-size:15px;font-weight:600;font-family:'Noto Sans Thai',sans-serif;
+  border:none;cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-next{background:var(--blue);color:#fff;flex:1}
+.btn-next:hover{background:#0d47a1}
+.btn-next:active{transform:scale(.97)}
+.btn-back{
+  background:#fff;color:var(--text2);
+  border:1.5px solid var(--gray4);padding:14px 16px;
+}
+.btn-back:active{transform:scale(.97)}
+.btn-submit{
+  background:linear-gradient(135deg,var(--green),#0a7a44);
+  color:#fff;flex:1;font-size:16px;
+}
+.btn-submit:active{transform:scale(.97)}
+.btn-submit:disabled{background:var(--gray3);color:var(--text3);cursor:not-allowed;transform:none}
+
+/* ── SUCCESS SCREEN ── */
+#success-screen{display:none;flex-direction:column;height:100%;overflow-y:auto}
+.success-header{
+  background:linear-gradient(160deg,var(--green),#086a3a);
+  padding:36px 24px 28px;text-align:center;color:#fff;flex-shrink:0;
+}
+.success-anim{
+  width:88px;height:88px;
+  background:rgba(255,255,255,.2);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:44px;margin:0 auto 16px;
+  animation:pop .5s cubic-bezier(.175,.885,.32,1.275) both;
+}
+@keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.success-header h2{font-size:24px;font-weight:700;margin-bottom:6px}
+.success-header p{font-size:13px;opacity:.85}
+
+.qr-card{
+  background:#fff;margin:0 16px;margin-top:-20px;
+  border-radius:var(--radius);padding:24px;text-align:center;
+  box-shadow:var(--shadow-lg);border:1px solid var(--gray3);
+}
+.qr-frame{
+  width:150px;height:150px;margin:0 auto 14px;
+  border:2px dashed #b3c7ed;border-radius:14px;
+  background:var(--blue-pale);
+  display:flex;align-items:center;justify-content:center;font-size:88px;
+}
+.reg-code{
+  font-size:22px;font-weight:800;color:var(--blue);
+  letter-spacing:3px;margin-bottom:5px;
+}
+.qr-hint{font-size:12px;color:var(--text3)}
+
+.result-detail{padding:18px 16px 0}
+.result-info-card{
+  background:var(--blue-pale);border:1px solid #c5d8f8;
+  border-radius:var(--radius-sm);padding:14px;
+  display:flex;gap:12px;align-items:flex-start;margin-bottom:16px;
+}
+.ric-icon{font-size:24px;flex-shrink:0}
+.ric-title{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:4px}
+.ric-body{font-size:12px;color:var(--text2);line-height:1.65}
+.result-rows{
+  background:#fff;border:1px solid var(--gray4);
+  border-radius:var(--radius-sm);overflow:hidden;margin-bottom:20px;
+}
+.result-row{
+  display:flex;padding:11px 14px;
+  border-bottom:1px solid var(--gray1);font-size:13px;
+}
+.result-row:last-child{border-bottom:none}
+.rr-l{color:var(--text3);width:90px;flex-shrink:0;font-weight:500}
+.rr-v{color:var(--text);font-weight:600}
+.btn-new-reg{
+  width:100%;padding:14px;
+  border:2px solid var(--blue);background:#fff;
+  color:var(--blue);border-radius:var(--radius-sm);
+  font-size:15px;font-weight:600;font-family:'Noto Sans Thai',sans-serif;
+  cursor:pointer;margin:0 0 24px;
+}
+</style>
+</head>
+<body>
+<div class="phone-outer">
+<div class="phone-frame">
+<div class="phone-screen">
+
+  <!-- STATUS BAR -->
+  <div class="status-bar">
+    <span id="clk">9:41</span>
+    <div class="sb-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+  </div>
+
+  <!-- MAIN APP -->
+  <div id="main-app" style="display:flex;flex-direction:column;height:100%">
+
+    <!-- HEADER -->
+    <div class="app-header">
+      <div class="hosp-row">
+        <div class="hosp-icon">🏥</div>
+        <div>
+          <div class="hosp-name">โรงพยาบาลกลาง</div>
+          <div class="hosp-sub">Pre-Registration Online</div>
+        </div>
+      </div>
+      <div class="header-greeting">ลงทะเบียนก่อนมา รพ.</div>
+      <div class="header-sub">ประหยัดเวลา ไม่ต้องรอคิวนาน ✨</div>
+    </div>
+
+    <!-- PROGRESS -->
+    <div class="progress-bar">
+      <div class="prog-track">
+        <div class="prog-dot active" id="pd1"><span class="pn">1</span></div>
+        <div class="prog-line" id="pl1"></div>
+        <div class="prog-dot idle" id="pd2"><span class="pn">2</span></div>
+        <div class="prog-line" id="pl2"></div>
+        <div class="prog-dot idle" id="pd3"><span class="pn">3</span></div>
+      </div>
+      <div class="prog-labels">
+        <span class="prog-label active" id="plb1">ข้อมูลตัวเอง</span>
+        <span class="prog-label" id="plb2">การนัดหมาย</span>
+        <span class="prog-label" id="plb3">ยืนยัน</span>
+      </div>
+    </div>
+
+    <!-- SCROLL AREA -->
+    <div class="scroll-area" id="scroll-area">
+
+      <!-- ──── PANEL 1 ──── -->
+      <div class="panel active" id="p1">
+        <div class="sec-title">
+          <div class="sec-icon">👤</div>ข้อมูลส่วนตัว
+        </div>
+
+        <div class="field">
+          <span class="field-label">ชื่อ-นามสกุล <span class="req">*</span></span>
+          <input id="f-name" type="text" placeholder="เช่น นางสาว สมหญิง ดีมาก" autocomplete="name">
+          <div class="err-txt" id="e-name" style="display:none">⚠ กรุณากรอกชื่อ-นามสกุล</div>
+        </div>
+
+        <div class="field">
+          <span class="field-label">เบอร์โทรศัพท์ <span class="req">*</span></span>
+          <input id="f-phone" type="tel" placeholder="0812345678" maxlength="10" inputmode="numeric">
+          <div class="err-txt" id="e-phone" style="display:none">⚠ กรอกเบอร์โทร 10 หลัก เริ่มต้น 0</div>
+        </div>
+
+        <div class="field">
+          <span class="field-label">ประเภทเอกสาร</span>
+          <div class="card-opts">
+            <label class="card-opt selected" id="opt-id" onclick="pickIdType('thai_id')">
+              <input type="radio" name="idt" value="thai_id" checked>
+              <div class="card-opt-radio"></div>
+              🪪 บัตรประชาชน
+            </label>
+            <label class="card-opt" id="opt-pp" onclick="pickIdType('passport')">
+              <input type="radio" name="idt" value="passport">
+              <div class="card-opt-radio"></div>
+              🌍 Passport
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="field-label" id="id-lbl">เลขบัตรประชาชน (13 หลัก) <span class="req">*</span></span>
+          <input id="f-idnum" type="text" placeholder="1234567890123" maxlength="13" inputmode="numeric">
+          <div class="err-txt" id="e-idnum" style="display:none">⚠ เลขบัตรประชาชนต้อง 13 หลัก</div>
+        </div>
+
+        <div class="row2">
+          <div class="field" style="margin:0">
+            <span class="field-label">วันเกิด</span>
+            <input id="f-dob" type="date">
+          </div>
+          <div class="field" style="margin:0">
+            <span class="field-label">เพศ</span>
+            <select id="f-gender">
+              <option value="">— เลือก —</option>
+              <option>ชาย</option><option>หญิง</option><option>อื่นๆ</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-next" onclick="next2()">ถัดไป →</button>
+        </div>
+      </div>
+
+      <!-- ──── PANEL 2 ──── -->
+      <div class="panel" id="p2">
+        <div class="sec-title">
+          <div class="sec-icon">📅</div>ข้อมูลการนัดหมาย
+        </div>
+
+        <div class="field">
+          <span class="field-label">วันที่ต้องการมา รพ. <span class="req">*</span></span>
+          <input id="f-apptdate" type="date">
+          <div class="err-txt" id="e-apptdate" style="display:none">⚠ กรุณาเลือกวันนัดหมาย</div>
+        </div>
+
+        <div class="field">
+          <span class="field-label">เวลาที่สะดวก</span>
+          <select id="f-appttime">
+            <option value="">— เลือกช่วงเวลา —</option>
+            <option>08:00 – 09:00 น.</option>
+            <option>09:00 – 10:00 น.</option>
+            <option>10:00 – 11:00 น.</option>
+            <option>11:00 – 12:00 น.</option>
+            <option>13:00 – 14:00 น.</option>
+            <option>14:00 – 15:00 น.</option>
+            <option>15:00 – 16:00 น.</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <span class="field-label">แผนก / คลินิก <span class="req">*</span></span>
+          <select id="f-clinic">
+            <option value="">— เลือกแผนก —</option>
+            <option>อายุรกรรม</option>
+            <option>ศัลยกรรมทั่วไป</option>
+            <option>กระดูกและข้อ</option>
+            <option>ระบบประสาท (Neurology)</option>
+            <option>จิตเวชศาสตร์ (Mental Health)</option>
+            <option>กุมารเวชกรรม</option>
+            <option>สูตินรีเวช</option>
+            <option>จักษุ (ตา)</option>
+            <option>โสต ศอ นาสิก (หู คอ จมูก)</option>
+            <option>ตรวจสุขภาพประจำปี</option>
+            <option>ฉุกเฉิน (ER)</option>
+          </select>
+          <div class="err-txt" id="e-clinic" style="display:none">⚠ กรุณาเลือกแผนก/คลินิก</div>
+        </div>
+
+        <div class="field">
+          <span class="field-label">สิทธิ์การรักษา</span>
+          <select id="f-payment">
+            <option value="">— เลือกสิทธิ์ —</option>
+            <option>เงินสด / บัตรเครดิต</option>
+            <option>ประกันสังคม (ม.33/ม.39/ม.40)</option>
+            <option>ประกันสุขภาพเอกชน</option>
+            <option>บัตรทอง (30 บาท)</option>
+            <option>สิทธิ์ข้าราชการ</option>
+            <option>รัฐวิสาหกิจ</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <span class="field-label">ประเภทผู้ป่วย</span>
+          <div class="card-opts">
+            <label class="card-opt selected" id="opt-new" onclick="pickVisit('new')">
+              <input type="radio" name="visit" value="ผู้ป่วยใหม่" checked>
+              <div class="card-opt-radio"></div>
+              ✨ ผู้ป่วยใหม่
+            </label>
+            <label class="card-opt" id="opt-old" onclick="pickVisit('old')">
+              <input type="radio" name="visit" value="ผู้ป่วยเก่า">
+              <div class="card-opt-radio"></div>
+              📋 ผู้ป่วยเก่า
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="field-label">อาการ / ความต้องการ</span>
+          <textarea id="f-complaint" placeholder="อธิบายอาการโดยย่อ หรือความต้องการที่ต้องการพบแพทย์ เช่น ปวดศีรษะมา 3 วัน มีไข้ตอนกลางคืน"></textarea>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-back" onclick="goStep(1)">← กลับ</button>
+          <button class="btn btn-next" onclick="next3()">ถัดไป →</button>
+        </div>
+      </div>
+
+      <!-- ──── PANEL 3 ──── -->
+      <div class="panel" id="p3">
+        <div class="sec-title">
+          <div class="sec-icon">✅</div>ตรวจสอบและยืนยัน
+        </div>
+
+        <div class="summary-box">
+          <div class="summary-head">📋 ข้อมูลของคุณ</div>
+          <div id="summ-body"></div>
+        </div>
+
+        <div class="consent-wrap" id="pdpa-wrap" onclick="toggleConsent()">
+          <div class="cb-box" id="cb">
+            <span id="cb-icon">  </span>
+          </div>
+          <div class="consent-text">
+            ข้าพเจ้ายินยอมให้โรงพยาบาลเก็บรวบรวม ใช้ และเปิดเผยข้อมูลส่วนบุคคล
+            ตาม<b>พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA)</b>
+            เพื่อวัตถุประสงค์ทางการแพทย์เท่านั้น
+          </div>
+        </div>
+        <div class="err-txt" id="e-pdpa" style="display:none;margin-bottom:10px">⚠ กรุณายอมรับข้อตกลง PDPA ก่อนส่งข้อมูล</div>
+
+        <div class="btn-row">
+          <button class="btn btn-back" onclick="goStep(2)">← กลับ</button>
+          <button class="btn btn-submit" id="btn-submit" onclick="doSubmit()">📤 ส่งข้อมูลลงทะเบียน</button>
+        </div>
+      </div>
+
+    </div><!-- /scroll-area -->
+  </div><!-- /main-app -->
+
+  <!-- ──── SUCCESS SCREEN ──── -->
+  <div id="success-screen">
+    <div class="success-header">
+      <div class="success-anim">✅</div>
+      <h2>ลงทะเบียนสำเร็จ!</h2>
+      <p>ระบบรับข้อมูลของคุณเรียบร้อยแล้ว</p>
+    </div>
+
+    <div style="flex:1;overflow-y:auto;padding-bottom:20px">
+      <div class="qr-card">
+        <div class="qr-frame">📲</div>
+        <div class="reg-code" id="s-regid">PR-2026-XXXX</div>
+        <div class="qr-hint">แสดงรหัสนี้ที่ Express Counter</div>
+      </div>
+
+      <div class="result-detail">
+        <div class="result-info-card">
+          <div class="ric-icon">💡</div>
+          <div>
+            <div class="ric-title">วิธีใช้บริการ Pre-Registration</div>
+            <div class="ric-body">
+              แสดงรหัส <b id="s-regid2"></b> ให้เจ้าหน้าที่ที่<b> Express Counter</b>
+              ไม่ต้องกรอกเอกสารซ้ำ ไม่ต้องรอคิวลงทะเบียนปกติ
+              เพียงยืนยันตัวตนและพบแพทย์ได้เลย ✨
+            </div>
+          </div>
+        </div>
+        <div class="result-rows" id="s-rows"></div>
+        <button class="btn-new-reg" onclick="resetAll()">🔄 ลงทะเบียนใหม่</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /phone-screen -->
+</div><!-- /phone-frame -->
+</div><!-- /phone-outer -->
+
+<script>
+// clock
+(function tick(){
+  const n=new Date();
+  document.getElementById('clk').textContent=
+    String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0');
+  setTimeout(tick,10000);
+})();
+
+let step=1,consent=false;
+
+function setErr(id,show,msg){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.style.display=show?'flex':'none';
+  if(msg)el.textContent='⚠ '+msg;
+}
+function setFieldErr(id,show){
+  const el=document.getElementById(id);
+  if(el){show?el.classList.add('has-error'):el.classList.remove('has-error')}
+}
+function v(id){return(document.getElementById(id)||{}).value||''}
+
+// id type toggle
+function pickIdType(t){
+  document.getElementById('opt-id').classList.toggle('selected',t==='thai_id');
+  document.getElementById('opt-pp').classList.toggle('selected',t==='passport');
+  const inp=document.getElementById('f-idnum');
+  if(t==='thai_id'){
+    document.getElementById('id-lbl').innerHTML='เลขบัตรประชาชน (13 หลัก) <span class="req">*</span>';
+    inp.placeholder='1234567890123';inp.maxLength=13;inp.inputMode='numeric';
+  } else {
+    document.getElementById('id-lbl').innerHTML='Passport Number <span class="req">*</span>';
+    inp.placeholder='AB1234567';inp.maxLength=12;inp.inputMode='text';
+  }
+  inp.value='';
+}
+function pickVisit(t){
+  document.getElementById('opt-new').classList.toggle('selected',t==='new');
+  document.getElementById('opt-old').classList.toggle('selected',t==='old');
+  document.querySelector('input[name="visit"][value="'+(t==='new'?'ผู้ป่วยใหม่':'ผู้ป่วยเก่า')+'"]').checked=true;
+}
+
+// PDPA
+function toggleConsent(){
+  consent=!consent;
+  document.getElementById('pdpa-wrap').classList.toggle('on',consent);
+  document.getElementById('cb-icon').textContent=consent?'✓':'  ';
+  if(consent)setErr('e-pdpa',false);
+}
+
+// validation
+function validateStep1(){
+  let ok=true;
+  const name=v('f-name').trim();
+  const phone=v('f-phone').trim();
+  const idType=document.querySelector('input[name="idt"]:checked').value;
+  const idNum=v('f-idnum').trim();
+  if(!name){setErr('e-name',true);setFieldErr('f-name',true);ok=false}
+  else{setErr('e-name',false);setFieldErr('f-name',false)}
+  if(!/^0\d{9}$/.test(phone)){setErr('e-phone',true);setFieldErr('f-phone',true);ok=false}
+  else{setErr('e-phone',false);setFieldErr('f-phone',false)}
+  if(idType==='thai_id'&&!/^\d{13}$/.test(idNum)){
+    setErr('e-idnum',true,'เลขบัตรประชาชนต้อง 13 หลักตัวเลข');setFieldErr('f-idnum',true);ok=false;
+  } else if(idType==='passport'&&!/^[A-Za-z0-9]{6,12}$/.test(idNum)){
+    setErr('e-idnum',true,'Passport ต้องมี 6-12 ตัวอักษร/ตัวเลข');setFieldErr('f-idnum',true);ok=false;
+  } else {setErr('e-idnum',false);setFieldErr('f-idnum',false)}
+  return ok;
+}
+function validateStep2(){
+  let ok=true;
+  if(!v('f-apptdate')){setErr('e-apptdate',true);setFieldErr('f-apptdate',true);ok=false}
+  else{setErr('e-apptdate',false);setFieldErr('f-apptdate',false)}
+  if(!v('f-clinic')){setErr('e-clinic',true);setFieldErr('f-clinic',true);ok=false}
+  else{setErr('e-clinic',false);setFieldErr('f-clinic',false)}
+  return ok;
+}
+
+function next2(){if(validateStep1())goStep(2)}
+function next3(){if(validateStep2()){buildSummary();goStep(3)}}
+
+function goStep(n){
+  step=n;
+  document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('active',i+1===n));
+  for(let i=1;i<=3;i++){
+    const pd=document.getElementById('pd'+i);
+    const lb=document.getElementById('plb'+i);
+    if(i<n){pd.className='prog-dot done';lb.className='prog-label done'}
+    else if(i===n){pd.className='prog-dot active';lb.className='prog-label active'}
+    else{pd.className='prog-dot idle';lb.className='prog-label'}
+    pd.innerHTML=i<n?'<span class="pn">'+i+'</span>':`<span class="pn">${i}</span>`;
+  }
+  for(let i=1;i<=2;i++){
+    document.getElementById('pl'+i).className='prog-line'+(i<n?' done':'');
+  }
+  document.getElementById('scroll-area').scrollTop=0;
+}
+
+function buildSummary(){
+  const rows=[
+    ['👤 ชื่อ-สกุล',v('f-name')],
+    ['📱 เบอร์โทร',v('f-phone')],
+    ['🏥 คลินิก',v('f-clinic')],
+    ['📅 วันนัดหมาย',v('f-apptdate')],
+    ['🕐 เวลา',v('f-appttime')||'ไม่ได้ระบุ'],
+    ['💳 สิทธิ์รักษา',v('f-payment')||'ไม่ได้ระบุ'],
+    ['📝 อาการ',v('f-complaint')||'ไม่ได้ระบุ'],
+  ];
+  document.getElementById('summ-body').innerHTML=rows.map(([l,vl])=>
+    `<div class="summary-row"><span class="sr-label">${l}</span><span class="sr-val">${vl}</span></div>`
+  ).join('');
+}
+
+function genId(){return'PR-2026-'+String(Math.floor(Math.random()*9000)+1000)}
+
+function doSubmit(){
+  if(!consent){setErr('e-pdpa',true);return}
+  setErr('e-pdpa',false);
+  const rec={
+    id:genId(),
+    fullName:v('f-name'),
+    phone:v('f-phone'),
+    idType:document.querySelector('input[name="idt"]:checked').value,
+    idNumber:v('f-idnum'),
+    birthDate:v('f-dob'),
+    gender:v('f-gender'),
+    appointmentDate:v('f-apptdate'),
+    appointmentTime:v('f-appttime'),
+    clinic:v('f-clinic'),
+    paymentType:v('f-payment')||'—',
+    visitType:document.querySelector('input[name="visit"]:checked')?.value||'ผู้ป่วยใหม่',
+    chiefComplaint:v('f-complaint')||'—',
+    status:'Pending Verify',
+    submittedAt:new Date().toISOString(),
+    submittedTime:new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'}),
+  };
+  const arr=JSON.parse(localStorage.getItem('preregRecords')||'[]');
+  arr.unshift(rec);
+  localStorage.setItem('preregRecords',JSON.stringify(arr));
+  showSuccess(rec);
+}
+
+function showSuccess(rec){
+  document.getElementById('main-app').style.display='none';
+  const ss=document.getElementById('success-screen');
+  ss.style.display='flex';
+  document.getElementById('s-regid').textContent=rec.id;
+  document.getElementById('s-regid2').textContent=rec.id;
+  document.getElementById('s-rows').innerHTML=[
+    ['คลินิก',rec.clinic],
+    ['วันนัดหมาย',rec.appointmentDate],
+    ['เวลา',rec.appointmentTime||'ไม่ได้ระบุ'],
+    ['ลงทะเบียนเมื่อ',rec.submittedTime],
+    ['สถานะ','⏳ รอการยืนยันจากเจ้าหน้าที่'],
+  ].map(([l,v])=>`<div class="result-row"><span class="rr-l">${l}</span><span class="rr-v">${v}</span></div>`).join('');
+}
+
+function resetAll(){
+  document.getElementById('main-app').style.display='flex';
+  document.getElementById('success-screen').style.display='none';
+  ['f-name','f-phone','f-idnum','f-dob','f-apptdate','f-appttime','f-clinic','f-payment','f-complaint']
+    .forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
+  document.getElementById('f-gender').value='';
+  consent=false;
+  document.getElementById('pdpa-wrap').classList.remove('on');
+  document.getElementById('cb-icon').textContent='  ';
+  pickIdType('thai_id');pickVisit('new');
+  goStep(1);
+}
+</script>
+</body>
+</html>
