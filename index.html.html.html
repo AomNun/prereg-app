@@ -17,7 +17,7 @@
   --shadow:0 2px 8px rgba(0,0,0,.1);--shadow-lg:0 8px 32px rgba(0,0,0,.15);
 }
 html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif}
-
+ 
 /* ── PHONE FRAME ── */
 .phone-outer{
   display:flex;align-items:center;justify-content:center;
@@ -44,7 +44,7 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
   display:flex;flex-direction:column;
   position:relative;
 }
-
+ 
 /* ── STATUS BAR ── */
 .status-bar{
   height:44px;background:var(--blue);
@@ -53,7 +53,7 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
   flex-shrink:0;
 }
 .sb-icons{display:flex;gap:5px;align-items:center;font-size:12px}
-
+ 
 /* ── APP HEADER ── */
 .app-header{
   background:linear-gradient(175deg,var(--blue) 0%,#0d47a1 100%);
@@ -76,7 +76,7 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
 .hosp-sub{font-size:11px;opacity:.7;margin-top:2px}
 .header-greeting{font-size:22px;font-weight:700;line-height:1.3;position:relative;z-index:1}
 .header-sub{font-size:13px;opacity:.75;margin-top:4px;position:relative;z-index:1}
-
+ 
 /* ── PROGRESS ── */
 .progress-bar{
   background:#fff;padding:14px 20px 10px;
@@ -100,17 +100,17 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
 .prog-label{font-size:10px;color:var(--text3);font-weight:500;transition:color .3s;text-align:center;flex:1}
 .prog-label.active{color:var(--blue);font-weight:700}
 .prog-label.done{color:var(--green)}
-
+ 
 /* ── SCROLL CONTENT ── */
 .scroll-area{flex:1;overflow-y:auto;padding:18px 16px 24px;background:var(--gray1)}
 .scroll-area::-webkit-scrollbar{width:3px}
 .scroll-area::-webkit-scrollbar-thumb{background:var(--gray4);border-radius:2px}
-
+ 
 /* ── PANELS ── */
 .panel{display:none;animation:fadeSlide .3s ease}
 .panel.active{display:block}
 @keyframes fadeSlide{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-
+ 
 /* ── SECTION CARD ── */
 .sec-title{
   display:flex;align-items:center;gap:10px;
@@ -123,7 +123,7 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
   display:flex;align-items:center;justify-content:center;
   font-size:19px;flex-shrink:0;
 }
-
+ 
 /* ── FIELDS ── */
 .field{margin-bottom:15px}
 .field-label{
@@ -151,7 +151,7 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
   padding-right:38px;
 }
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-
+ 
 /* ── CARD OPTION ── */
 .card-opts{display:flex;gap:10px;flex-wrap:wrap}
 .card-opt{
@@ -172,7 +172,7 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
 }
 .card-opt.selected .card-opt-radio{border-color:var(--blue);background:var(--blue)}
 .card-opt.selected .card-opt-radio::after{content:'';width:6px;height:6px;background:#fff;border-radius:50%}
-
+ 
 /* ── SUMMARY ── */
 .summary-box{
   background:#fff;border:1px solid var(--gray4);
@@ -190,7 +190,7 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
 .summary-row:last-child{border-bottom:none}
 .sr-label{color:var(--text3);width:110px;flex-shrink:0;font-weight:500}
 .sr-val{color:var(--text);font-weight:600;flex:1}
-
+ 
 /* ── CONSENT ── */
 .consent-wrap{
   background:#fff;border:1.5px solid var(--gray4);
@@ -208,7 +208,7 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
 .consent-wrap.on .cb-box{background:var(--blue);border-color:var(--blue);color:#fff}
 .consent-text{font-size:12px;color:var(--text2);line-height:1.65}
 .consent-text b{color:var(--blue)}
-
+ 
 /* ── BUTTONS ── */
 .btn-row{display:flex;gap:10px;margin-top:18px}
 .btn{
@@ -231,7 +231,7 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
 }
 .btn-submit:active{transform:scale(.97)}
 .btn-submit:disabled{background:var(--gray3);color:var(--text3);cursor:not-allowed;transform:none}
-
+ 
 /* ── SUCCESS SCREEN ── */
 #success-screen{display:none;flex-direction:column;height:100%;overflow-y:auto}
 .success-header{
@@ -248,7 +248,7 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
 @keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
 .success-header h2{font-size:24px;font-weight:700;margin-bottom:6px}
 .success-header p{font-size:13px;opacity:.85}
-
+ 
 .qr-card{
   background:#fff;margin:0 16px;margin-top:-20px;
   border-radius:var(--radius);padding:24px;text-align:center;
@@ -265,7 +265,7 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
   letter-spacing:3px;margin-bottom:5px;
 }
 .qr-hint{font-size:12px;color:var(--text3)}
-
+ 
 .result-detail{padding:18px 16px 0}
 .result-info-card{
   background:var(--blue-pale);border:1px solid #c5d8f8;
@@ -299,16 +299,16 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
 <div class="phone-outer">
 <div class="phone-frame">
 <div class="phone-screen">
-
+ 
   <!-- STATUS BAR -->
   <div class="status-bar">
     <span id="clk">9:41</span>
     <div class="sb-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
   </div>
-
+ 
   <!-- MAIN APP -->
   <div id="main-app" style="display:flex;flex-direction:column;height:100%">
-
+ 
     <!-- HEADER -->
     <div class="app-header">
       <div class="hosp-row">
@@ -321,7 +321,7 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
       <div class="header-greeting">ลงทะเบียนก่อนมา รพ.</div>
       <div class="header-sub">ประหยัดเวลา ไม่ต้องรอคิวนาน ✨</div>
     </div>
-
+ 
     <!-- PROGRESS -->
     <div class="progress-bar">
       <div class="prog-track">
@@ -337,28 +337,28 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
         <span class="prog-label" id="plb3">ยืนยัน</span>
       </div>
     </div>
-
+ 
     <!-- SCROLL AREA -->
     <div class="scroll-area" id="scroll-area">
-
+ 
       <!-- ──── PANEL 1 ──── -->
       <div class="panel active" id="p1">
         <div class="sec-title">
           <div class="sec-icon">👤</div>ข้อมูลส่วนตัว
         </div>
-
+ 
         <div class="field">
           <span class="field-label">ชื่อ-นามสกุล <span class="req">*</span></span>
           <input id="f-name" type="text" placeholder="เช่น นางสาว สมหญิง ดีมาก" autocomplete="name">
           <div class="err-txt" id="e-name" style="display:none">⚠ กรุณากรอกชื่อ-นามสกุล</div>
         </div>
-
+ 
         <div class="field">
           <span class="field-label">เบอร์โทรศัพท์ <span class="req">*</span></span>
           <input id="f-phone" type="tel" placeholder="0812345678" maxlength="10" inputmode="numeric">
           <div class="err-txt" id="e-phone" style="display:none">⚠ กรอกเบอร์โทร 10 หลัก เริ่มต้น 0</div>
         </div>
-
+ 
         <div class="field">
           <span class="field-label">ประเภทเอกสาร</span>
           <div class="card-opts">
@@ -374,13 +374,13 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
             </label>
           </div>
         </div>
-
+ 
         <div class="field">
           <span class="field-label" id="id-lbl">เลขบัตรประชาชน (13 หลัก) <span class="req">*</span></span>
           <input id="f-idnum" type="text" placeholder="1234567890123" maxlength="13" inputmode="numeric">
           <div class="err-txt" id="e-idnum" style="display:none">⚠ เลขบัตรประชาชนต้อง 13 หลัก</div>
         </div>
-
+ 
         <div class="row2">
           <div class="field" style="margin:0">
             <span class="field-label">วันเกิด</span>
@@ -394,24 +394,24 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
             </select>
           </div>
         </div>
-
+ 
         <div class="btn-row">
           <button class="btn btn-next" onclick="next2()">ถัดไป →</button>
         </div>
       </div>
-
+ 
       <!-- ──── PANEL 2 ──── -->
       <div class="panel" id="p2">
         <div class="sec-title">
           <div class="sec-icon">📅</div>ข้อมูลการนัดหมาย
         </div>
-
+ 
         <div class="field">
           <span class="field-label">วันที่ต้องการมา รพ. <span class="req">*</span></span>
           <input id="f-apptdate" type="date">
           <div class="err-txt" id="e-apptdate" style="display:none">⚠ กรุณาเลือกวันนัดหมาย</div>
         </div>
-
+ 
         <div class="field">
           <span class="field-label">เวลาที่สะดวก</span>
           <select id="f-appttime">
@@ -425,7 +425,7 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
             <option>15:00 – 16:00 น.</option>
           </select>
         </div>
-
+ 
         <div class="field">
           <span class="field-label">แผนก / คลินิก <span class="req">*</span></span>
           <select id="f-clinic">
@@ -444,7 +444,7 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
           </select>
           <div class="err-txt" id="e-clinic" style="display:none">⚠ กรุณาเลือกแผนก/คลินิก</div>
         </div>
-
+ 
         <div class="field">
           <span class="field-label">สิทธิ์การรักษา</span>
           <select id="f-payment">
@@ -457,7 +457,7 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
             <option>รัฐวิสาหกิจ</option>
           </select>
         </div>
-
+ 
         <div class="field">
           <span class="field-label">ประเภทผู้ป่วย</span>
           <div class="card-opts">
@@ -473,29 +473,29 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
             </label>
           </div>
         </div>
-
+ 
         <div class="field">
           <span class="field-label">อาการ / ความต้องการ</span>
           <textarea id="f-complaint" placeholder="อธิบายอาการโดยย่อ หรือความต้องการที่ต้องการพบแพทย์ เช่น ปวดศีรษะมา 3 วัน มีไข้ตอนกลางคืน"></textarea>
         </div>
-
+ 
         <div class="btn-row">
           <button class="btn btn-back" onclick="goStep(1)">← กลับ</button>
           <button class="btn btn-next" onclick="next3()">ถัดไป →</button>
         </div>
       </div>
-
+ 
       <!-- ──── PANEL 3 ──── -->
       <div class="panel" id="p3">
         <div class="sec-title">
           <div class="sec-icon">✅</div>ตรวจสอบและยืนยัน
         </div>
-
+ 
         <div class="summary-box">
           <div class="summary-head">📋 ข้อมูลของคุณ</div>
           <div id="summ-body"></div>
         </div>
-
+ 
         <div class="consent-wrap" id="pdpa-wrap" onclick="toggleConsent()">
           <div class="cb-box" id="cb">
             <span id="cb-icon">  </span>
@@ -507,16 +507,16 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
           </div>
         </div>
         <div class="err-txt" id="e-pdpa" style="display:none;margin-bottom:10px">⚠ กรุณายอมรับข้อตกลง PDPA ก่อนส่งข้อมูล</div>
-
+ 
         <div class="btn-row">
           <button class="btn btn-back" onclick="goStep(2)">← กลับ</button>
           <button class="btn btn-submit" id="btn-submit" onclick="doSubmit()">📤 ส่งข้อมูลลงทะเบียน</button>
         </div>
       </div>
-
+ 
     </div><!-- /scroll-area -->
   </div><!-- /main-app -->
-
+ 
   <!-- ──── SUCCESS SCREEN ──── -->
   <div id="success-screen">
     <div class="success-header">
@@ -524,14 +524,14 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
       <h2>ลงทะเบียนสำเร็จ!</h2>
       <p>ระบบรับข้อมูลของคุณเรียบร้อยแล้ว</p>
     </div>
-
+ 
     <div style="flex:1;overflow-y:auto;padding-bottom:20px">
       <div class="qr-card">
         <div class="qr-frame">📲</div>
         <div class="reg-code" id="s-regid">PR-2026-XXXX</div>
         <div class="qr-hint">แสดงรหัสนี้ที่ Express Counter</div>
       </div>
-
+ 
       <div class="result-detail">
         <div class="result-info-card">
           <div class="ric-icon">💡</div>
@@ -549,11 +549,11 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
       </div>
     </div>
   </div>
-
+ 
 </div><!-- /phone-screen -->
 </div><!-- /phone-frame -->
 </div><!-- /phone-outer -->
-
+ 
 <script>
 // clock
 (function tick(){
@@ -562,9 +562,9 @@ html,body{height:100%;background:#e8ecf0;font-family:'Noto Sans Thai',sans-serif
     String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0');
   setTimeout(tick,10000);
 })();
-
+ 
 let step=1,consent=false;
-
+ 
 function setErr(id,show,msg){
   const el=document.getElementById(id);
   if(!el)return;
@@ -576,7 +576,7 @@ function setFieldErr(id,show){
   if(el){show?el.classList.add('has-error'):el.classList.remove('has-error')}
 }
 function v(id){return(document.getElementById(id)||{}).value||''}
-
+ 
 // id type toggle
 function pickIdType(t){
   document.getElementById('opt-id').classList.toggle('selected',t==='thai_id');
@@ -596,7 +596,7 @@ function pickVisit(t){
   document.getElementById('opt-old').classList.toggle('selected',t==='old');
   document.querySelector('input[name="visit"][value="'+(t==='new'?'ผู้ป่วยใหม่':'ผู้ป่วยเก่า')+'"]').checked=true;
 }
-
+ 
 // PDPA
 function toggleConsent(){
   consent=!consent;
@@ -604,7 +604,7 @@ function toggleConsent(){
   document.getElementById('cb-icon').textContent=consent?'✓':'  ';
   if(consent)setErr('e-pdpa',false);
 }
-
+ 
 // validation
 function validateStep1(){
   let ok=true;
@@ -631,10 +631,10 @@ function validateStep2(){
   else{setErr('e-clinic',false);setFieldErr('f-clinic',false)}
   return ok;
 }
-
+ 
 function next2(){if(validateStep1())goStep(2)}
 function next3(){if(validateStep2()){buildSummary();goStep(3)}}
-
+ 
 function goStep(n){
   step=n;
   document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('active',i+1===n));
@@ -651,7 +651,7 @@ function goStep(n){
   }
   document.getElementById('scroll-area').scrollTop=0;
 }
-
+ 
 function buildSummary(){
   const rows=[
     ['👤 ชื่อ-สกุล',v('f-name')],
@@ -666,9 +666,9 @@ function buildSummary(){
     `<div class="summary-row"><span class="sr-label">${l}</span><span class="sr-val">${vl}</span></div>`
   ).join('');
 }
-
+ 
 function genId(){return'PR-2026-'+String(Math.floor(Math.random()*9000)+1000)}
-
+ 
 function doSubmit(){
   if(!consent){setErr('e-pdpa',true);return}
   setErr('e-pdpa',false);
@@ -695,7 +695,7 @@ function doSubmit(){
   localStorage.setItem('preregRecords',JSON.stringify(arr));
   showSuccess(rec);
 }
-
+ 
 function showSuccess(rec){
   document.getElementById('main-app').style.display='none';
   const ss=document.getElementById('success-screen');
@@ -710,7 +710,7 @@ function showSuccess(rec){
     ['สถานะ','⏳ รอการยืนยันจากเจ้าหน้าที่'],
   ].map(([l,v])=>`<div class="result-row"><span class="rr-l">${l}</span><span class="rr-v">${v}</span></div>`).join('');
 }
-
+ 
 function resetAll(){
   document.getElementById('main-app').style.display='flex';
   document.getElementById('success-screen').style.display='none';
